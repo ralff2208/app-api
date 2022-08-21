@@ -9,7 +9,7 @@ terraform {
   required_version = ">= 0.14"
   
   backend "gcs" {
-    bucket = "${var.bucket_name}"
+    bucket = "test-tembici-gcs"
     prefix = "terraform/state"
   }
 }
