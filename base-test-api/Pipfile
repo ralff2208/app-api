@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+flask = "1.1.4"
+flask-script = "*"
+flask_bootstrap = "*"
+requests = "*"
+gunicorn = "*"
+pytest = "*"
+flake8 = "*"
+yapf = "*"
+flask-api = "*"
+pytest-docker-compose = "*"
+markupsafe = "==2.0.1"
+werkzeug = "==1.0.1"
+
+[requires]
+python_version = "3.6"
