@@ -26,8 +26,8 @@ jobs:
 
       - name: Terraform Init
         id: init
-        #run: terraform init --reconfigure
-        run: terraform init 
+        run: terraform init --reconfigure
+        #run: terraform init 
 
       - name: Terraform Plan
         id: plan
