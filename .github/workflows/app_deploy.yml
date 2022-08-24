@@ -16,6 +16,7 @@ jobs:
       ARTIFACTORY_REGISTRY_URL: us-central1-docker.pkg.dev
       GKE_CLUSTER_NAME: tembici-gke
       GKE_CLUSTER_REGION: us-central1
+      SA_ARTIFACTORY_REGISTRY: ${{ secrets.GOOGLE_CREDENTIALS}}
     name: build and push image to Registry
     runs-on: ubuntu-latest
 
@@ -50,7 +51,7 @@ jobs:
           --docker-server=https://$ARTIFACTORY_REGISTRY_URL \
           --docker-email=exec-terraform@sixth-emissary-359700.iam.gserviceaccount.com \
           --docker-username=_json_key \
-          --docker-password="$(cat ${{ secrets.GOOGLE_CREDENTIALS}}"
+          --docker-password="$(cat $SA_ARTIFACTORY_REGISTRY)"
           kubectl apply -f k8s/app-deployment.yml  
           kubectl apply -f k8s/app-service.yml  
           kubectl apply -f k8s/app-hpa.yml  
