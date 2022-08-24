@@ -20,23 +20,20 @@ jobs:
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
-
-      - uses: google-github-actions/setup-gcloud@v0
+      
+      - name: auth
+        uses: google-github-actions/auth@v0
         with: 
-          service_account_key: ${{secrets.GOOGLE_CREDENTIALS}}
-          project_id: ${{env.PROJECT_ID}}
-          export_default_credentials: true
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS}}   
+
+      - name: Using Gcloud SDK
+        uses: google-github-actions/setup-gcloud@v0
       
       - name: Build docker 
         run: docker build -t $IMAGE_NAME:latest . 
 
-      - name: Configure docker
-        run: |-
-          gcloud auth configure-docker --quiet
-
       - name: Build and push Image to Registry
-        run: |-
-          docker push $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE:latest
+        run: docker push $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:latest
 
 
 
