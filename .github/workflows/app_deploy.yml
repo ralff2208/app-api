@@ -14,7 +14,8 @@ jobs:
       REGISTRY: app-registry
       PROJECT_ID: sixth-emissary-359700
       ARTIFACTORY_REGISTRY_URL: us-central1-docker.pkg.dev
-      GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+      GKE_CLUSTER_NAME: tembici-gke
+      GKE_CLUSTER_REGION: us-central1
     name: build and push image to Registry
     runs-on: ubuntu-latest
 
@@ -22,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - name: auth
+      - name: Auth GCP
         uses: google-github-actions/auth@v0
         with: 
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS}}   
@@ -30,15 +31,24 @@ jobs:
       - name: Using Gcloud SDK
         uses: google-github-actions/setup-gcloud@v0
 
-      - name: Configure docker 
+      - name: Login in to google artifactory registry
         run: gcloud auth configure-docker $ARTIFACTORY_REGISTRY_URL --quiet  
       
-      - name: Build docker 
+      - name: Build docker image 
         run: docker build -t $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG . 
 
-      - name: Build and push Image to Registry
+      - name: Push Docker Image to Google Artifactory Registry
         run: docker push $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG
+        
+      - name: Get GKE credentials
+        run: gcloud container clusters get-credentials $GKE_CLUSTER_NAME $GKE_CLUSTER_REGION
 
+      - name: Deploy k8s
+        run: |
+          kubectl apply -f k8s/app-ns.yml  
+          kubectl apply -f k8s/app-deployment.yml  
+          kubectl apply -f k8s/app-service.yml  
+          kubectl apply -f k8s/app-hpa.yml  
 
 
 
