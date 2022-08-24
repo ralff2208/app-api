@@ -34,7 +34,7 @@ jobs:
         run: gcloud auth configure-docker $ARTIFACTORY_REGISTRY_URL --quiet  
       
       - name: Build docker 
-        run: docker build -t $IMAGE_NAME:$TAG . 
+        run: docker build -t $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG . 
         #run: docker build -t us-central1-docker.pkg.dev/sixth-emissary-359700/app-registry/api:latest --no-cache .
 
       - name: Build and push Image to Registry
