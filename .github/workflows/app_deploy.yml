@@ -30,7 +30,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
 
       - name: Configure docker 
-        run: gcloud auth configure-docker --quiet  
+        run: gcloud auth configure-docker $ARTIFACTORY_REGISTRY_URL --quiet  
       
       - name: Build docker 
         #run: docker build -t $IMAGE_NAME:latest . 
