@@ -1,8 +1,6 @@
 apiVersion: app/v1
 kind: Deployment
 metadata:
-  labels:
-    run: app-api
   name: app-api
   namespace: tembici-app
 spec:
@@ -34,6 +32,4 @@ spec:
             memory: "1Gi"
             cpu: "400m"          
       restartPolicy: Always
-      imagePullSecrets:
-        - name: dockerhub
 status: {}
