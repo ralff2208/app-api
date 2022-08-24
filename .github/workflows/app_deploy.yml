@@ -46,8 +46,7 @@ jobs:
       - name: Deploy k8s
         run: |
           kubectl apply -f k8s/app-ns.yml  
-          kubectl run app-api  -n tembici-app --image=$ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG
-       #  kubectl apply -f k8s/app-deployment.yml  
+          kubectl run app-api -n tembici-app --image=$ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG
           kubectl apply -f k8s/app-service.yml  
           kubectl apply -f k8s/app-hpa.yml  
 
