@@ -44,7 +44,7 @@ jobs:
         run: gcloud container clusters get-credentials $GKE_CLUSTER_NAME --region $GKE_CLUSTER_REGION
 
       - name: Deploy k8s
-         run: |
+        run: |
           kubectl apply -f k8s/app-ns.yml  
           kubectl run app-api  -n tembici-app --image=$ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG
        #  kubectl apply -f k8s/app-deployment.yml  
