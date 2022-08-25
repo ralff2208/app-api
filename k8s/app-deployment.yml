@@ -13,8 +13,8 @@ spec:
       labels:
         app: app-api
     spec:
-      imagePullSecrets:
-      - name: artifact-registry      
+#      imagePullSecrets:
+#      - name: artifact-registry      
       containers:
       - name: app-api
         image: us-central1-docker.pkg.dev/sixth-emissary-359700/app-registry/api:latest
