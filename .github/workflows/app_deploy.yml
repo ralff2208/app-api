@@ -16,7 +16,7 @@ jobs:
       ARTIFACTORY_REGISTRY_URL: us-central1-docker.pkg.dev
       GKE_CLUSTER_NAME: tembici-gke
       GKE_CLUSTER_REGION: us-central1
-      SA_ARTIFACTORY_REGISTRY: ${{ secrets.GOOGLE_CREDENTIALS}}
+      SA_ARTIFACTORY_REGISTRY: ${{ secrets.SA_CREDENTIALS}}
       SA_EMAIL: exec-terraform@sixth-emissary-359700.iam.gserviceaccount.com
     name: build and push image to Registry
     runs-on: ubuntu-latest
