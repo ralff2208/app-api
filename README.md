@@ -4,7 +4,7 @@ O critério de avaliação desse teste é analisar as formas de pensar, organiza
 
 ## forma de entrega.
 
-Fork o repositório e altere o arquivo ANSWERS.md com as respostas e observações que achar necessário para rodar o código e possíveis considerações adicionais.
+Fork o repositório e altere o arquivo [ANSWERS.md](ANSWERS.md) com as respostas e observações que achar necessário para rodar o código e possíveis considerações adicionais.
 
 ## objetivos.
 Dentro do repositório tem uma aplicação Flask bem simples, é uma API que responde pong à rota /ping.
