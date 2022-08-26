@@ -20,6 +20,7 @@ jobs:
       ARTIFACTORY_REGISTRY_URL: us-central1-docker.pkg.dev
       GKE_CLUSTER_NAME: tembici-gke
       GKE_CLUSTER_REGION: us-central1
+      SERVICE_IP: kubectl get svc -n tembici-app app-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
     name: build and push image to Registry
     runs-on: ubuntu-latest
 
@@ -59,6 +60,4 @@ jobs:
           kubectl -n tembici-app rollout restart deployment/app-api
 
       - name: Check api service
-        run: |
-        SERVICE_IP=$(kubectl get svc -n tembici-app app-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        curl http://$SERVICE_IP/api/ping        
+        run: sleep 30s &&  curl http://$SERVICE_IP/api/ping        
