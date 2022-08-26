@@ -60,6 +60,5 @@ jobs:
 
       - name: Check api service
         run: |
-        sleep 30         
         SERVICE_IP=$(kubectl get svc -n tembici-app app-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
         curl http://$SERVICE_IP/api/ping        
