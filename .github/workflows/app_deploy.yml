@@ -60,4 +60,4 @@ jobs:
           kubectl -n tembici-app rollout restart deployment/app-api
 
       - name: Check api service
-        run: sleep 30s &&  curl http://$SERVICE_IP/api/ping        
+        run: sleep 30s &&  curl http://${SERVICE_IP}/api/ping        
