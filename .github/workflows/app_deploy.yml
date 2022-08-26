@@ -58,5 +58,8 @@ jobs:
           kubectl apply -f k8s/app-hpa.yml  
           kubectl -n tembici-app rollout restart deployment/app-api
 
-      - name: Check api service
-        run: sleep 30s && export SERVICE_IP=$(kubectl get svc -n tembici-app app-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}') && curl http://$SERVICE_IP/api/ping        
+      - name: Check Flask API 
+        run: | 
+          sleep 30s \ 
+          export SERVICE_IP=$(kubectl get svc -n tembici-app app-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}') \ 
+          curl http://$SERVICE_IP/api/ping
