@@ -10,7 +10,7 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    run: app-api
+    app: app-api
   type: LoadBalancer
 status:
   loadBalancer: {}
