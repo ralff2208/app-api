@@ -10,5 +10,5 @@ def client():
 
 
 def test_ping(client):
-    rv = client.get('/api/ping')
+    rv = client.get('/api/pong')
     assert b'pong' in rv.data
