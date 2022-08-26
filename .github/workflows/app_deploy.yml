@@ -48,7 +48,7 @@ jobs:
       - name: Deploy k8s
         run: |
           kubectl apply -f k8s/app-ns.yml 
-          kubectl apply -f k8s/app-deployment.yml  
+          cat k8s/app-deployment.yml | sed "s#__IMAGE__#${ARTIFACTORY_REGISTRY_URL}/${PROJECT_ID}/${REGISTRY}/${IMAGE_NAME}:${TAG}#g" | kubectl apply --force -f -
           kubectl apply -f k8s/app-service.yml  
           kubectl apply -f k8s/app-hpa.yml  
           kubectl -n tembici-app rollout restart deployment/app-api
