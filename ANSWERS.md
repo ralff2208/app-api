@@ -10,7 +10,7 @@ This is a simple project that will build, test, push and deploy flask api applic
 
 4- Create a secret on github actions called **GOOGLE_CREDENTIALS** with the content in service account key file (.json)
 
-5- Run the github actions pipeline
+5- Go to git actions and select **Pipeline application** workflow
 
 6- When pipeline finished, run these command to take the Public IP for the service: 
 ```
