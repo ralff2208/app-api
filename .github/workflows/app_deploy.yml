@@ -1,11 +1,12 @@
 name: "Build, push and deploy docker images"
 
 on:
-  push:
+  pull_request:        
     branches:
       - master
-  pull_request:
 
+  workflow_dispatch:
+          
 jobs:
   build-push-image:
     env: 
@@ -36,6 +37,9 @@ jobs:
       
       - name: Build docker image 
         run: docker build -t $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG . 
+      
+      - name: Test app
+        run: docker run -t $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG bash -c "BASE_API_ENV=test pipenv run pytest" 
 
       - name: Push Docker Image to Google Artifactory Registry
         run: docker push $ARTIFACTORY_REGISTRY_URL/$PROJECT_ID/$REGISTRY/$IMAGE_NAME:$TAG
@@ -50,8 +54,4 @@ jobs:
           kubectl apply -f k8s/app-service.yml  
           kubectl apply -f k8s/app-hpa.yml  
           kubectl -n tembici-app rollout restart deployment/app-api
-
-
-
-
 

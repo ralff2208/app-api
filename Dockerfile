@@ -12,4 +12,4 @@ RUN PIPENV_VENV_IN_PROJECT=1  pipenv install
 
 EXPOSE 8080
 
-ENTRYPOINT ["pipenv", "run", "python", "start.py", "runserver"]
+CMD ["pipenv", "run", "python", "start.py", "runserver"]
